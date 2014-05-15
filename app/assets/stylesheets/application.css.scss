@@ -1,0 +1,129 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+@import 'branding';
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $ech_charcoal_10;
+    font-size: $base_font_size;
+    font-family: $serif_font;
+    margin: 0;
+    padding: 0;
+}
+
+#banner {
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+    margin: 0;
+    padding: 0;
+    background: $ech_lime;
+    border-bottom: 2px solid;
+    color: black;
+    text-align: left;
+    height: 120px;
+    width: 100%;
+
+#header {
+    width: 60%;
+    float: left;
+.title {
+    font-variant: small-caps;
+    font-size: 3em;
+    line-height: 1em;
+    font-family: $serif_font;
+    margin: 10px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.subtitle {
+    display: block;
+    margin: 12px;
+    font-family: $serif_font;
+    overflow: hidden;
+}
+}
+#logo {
+    float: right;
+}
+}
+
+#notice {
+    color: black !important;
+    border: 2px solid $ech_red;
+    padding: 2em;
+    margin-bottom: 2em;
+    background-color: $ech_lime_10;
+    font: bold smaller sans-serif;
+}
+
+#navigation {
+    font-family: $sans_serif_font;
+    position: fixed;
+    top: 122px;
+    width: 8em;
+    height: 100%;
+    background-color: $ech_lime;
+ul {
+    list-style: none;
+    margin: 1em 0.5em;
+    padding: 0;
+a:link {
+    color: $ech_charcoal_80;
+    text-decoration: none;
+}
+a:hover {
+    color: $ech_charcoal_80;
+    text-decoration: underline;
+}
+}
+}
+
+#content {
+    z-index: -1;
+    padding-left: 8em;
+    margin-top: 130px;
+table {
+    border-collapse: collapse;
+    text-align: left;
+th {
+    font-family: $sans_serif_font;
+    padding: 5px;
+}
+tr td {
+    font-size: small;
+    padding: 5px;
+    vertical-align: top;
+}
+}
+
+.list_actions {
+    font-size: x-small;
+    text-align: right;
+    padding: 0 1em 0 1em;
+    line-height: 60%;
+}
+.list_line_even {
+    background: $ech_charcoal_10;
+}
+.list_line_odd {
+    background: $ech_charcoal_30;
+}
+}

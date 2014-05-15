@@ -1,0 +1,47 @@
+<% if notice %>
+	<p id="notice"><%= notice %></p>
+<% end %>
+<table>
+  <thead>
+  <tr>
+	<th>IATA Code</th>
+	<th>Name</th>
+	<th>Country</th>
+	<th>City</th>
+	<th>State</th>
+	<th>State Name</th>
+	<th>Lat</th>
+	<th>Long</th>
+	<th>Wac</th>
+	<th>Notes</th>
+	<th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @airports.each do |airport| %>
+	  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+		<td><%= airport.code %></td>
+		<td><%= airport.name %></td>
+		<td><%= airport.country.iso_name %></td>
+		<td><%= airport.city %></td>
+		<td><%= airport.state %></td>
+		<td><%= airport.country.regions.find_by_region_code(airport.state) ? airport.country.regions.find_by_region_code(airport.state).name : nil %></td>
+		<td><%= airport.latitude %></td>
+		<td><%= airport.longitude %></td>
+		<td><%= airport.wac %></td>
+		<td><%= airport.notes %></td>
+		<td class="list_actions">
+		  <p><%= link_to 'Show', airport %></p>
+
+		  <p><%= link_to 'Edit', edit_airport_path(airport) %></p>
+
+		  <p><%= link_to 'Destroy', airport, method: :delete, data: {confirm: 'Are you sure?'} %></p>
+	  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Airport', new_airport_path %>

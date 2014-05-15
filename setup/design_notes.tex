@@ -1,0 +1,464 @@
+\documentclass[]{report}
+\usepackage{ulem}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{er}
+
+% Title Page
+\title{Traffic Forecaster Design Notes}
+\author{Tim Rowe}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\tableofcontents
+\listoffigures
+\listoftables
+\chapter{Introduction}
+\chapter{Populating Data}
+\section{General}
+The data is imported from the files \verb|Schedule Database Model v2.xlsm|, ??? and the internet.
+
+The Excel files are too large for any of the current Ruby Excel importers, so the individual worksheets have to be exported to CSV format. Calculated data that depends on other worksheets is invalidated by this process, but that does not matter because it is recalculated once it is imported.
+\section{Support Tools}
+\subsection{Airports}
+The \verb!airports.rb! program reads a CSV file of airport details in the original spreadsheet format, and outputs a rails seed file to populate the database Airport table.
+\begin{description}
+\item[Note]The spreadsheet wrongly codes Queensland, Australia as 'QL'. It should be 'QLD'.
+\item[Note]The spreadsheet uses an 'SF' region code in Russia. This is not an ISO code, and needs to be replaced by the correct regional code for each airport.
+\item[Note]The spreadsheet uses an 'IF' region code in Russia. This is not an ISO code, and needs to be replaced by the correct regional code for each airport.
+\item[Note]The database incorrectly has 'SC' instead of 'SCT' for Scotland
+\item[Note]The database wrongly has the Channel Islands as a region of the UK. They are autonomous countries with their own ISO codes.
+\item[Note]Garberville, WI, Shingletown, CA, Window Rock, AZ, Santa Rosa, CA wrongly identified as being in the UK.
+\item[Note]London St. Pancras misspelled.
+\end{description}
+\subsection{Countries}
+The \verb!countries.rb! program interrogates the internet for a current list of ISO\ 3166-1 country codes. If run from the command line\footnote{requires a ruby interpreter; run with  \texttt{ruby countries.rb} if the computer does not recognise it as a program file} it produces a comma-separated list of all countries. 
+
+Because it interrogates the internet for its data, it is vulnerable to changes to the required pages and to internet time-outs. This is why it does not update the traffic forecaster database automatically; the data should be checked for correctness before use.
+
+See the program documentation for current details.
+
+\begin{description}
+\item[Note]Taiwan is imported incorrectly. The seeds file has to be updated by hand.
+\item[Note]The spreadsheet has "AND" as the Alpha3 code for Andorra, but the ISO code is "ADO". If the spreadsheet is used as the sole source of country data, the seeds file will have to be updated by hand.
+\item[Note]The spreadsheet has an incorrect Alpha2 code for Kosovo, which causes a spurious entry merging Kosovo and Sri-Lanka that must be removed by hand.
+\item[Note]A spurious entry for Romania with the incorrect Alpha3 code of 'ROM' is created and must be deleted by hand.
+\item[Note]A spurious entry for Timor-Leste with the incorrect Alpha3 code of 'TLS' is created and must be deleted by hand.
+\item[Note]The program does not find the Alpha2 code for Samoa ('WS'), which must therefore be added by hand.
+\end{description}
+
+\subsection{Regions}
+The \texttt{regions.rb} program interrogates the internet for a current list of ISO\ 3166-2 region codes.
+
+ If run from the command line\footnote{requires a ruby interpreter; run with  \texttt{ruby regions.rb} if the computer does not recognise it as a program file} it produces a comma-separated list of all countries. 
+
+Because it interrogates the internet for its data, it is vulnerable to changes to the required pages and to internet time-outs. This is why it does not update the traffic forecaster database automatically; the data should be checked for correctness before use.
+
+The program options for \texttt{import\_regions} are:
+\begin{description}
+\item[\texttt{-h, -help}] Print usage information instead of running the import
+\item[\texttt{-l[logfile]}] Record progress information, warnings and errors to \texttt{[logfile]}. if \texttt{-l} is specified with no \texttt{logfile}, logging goes to \texttt{STDOUT}
+\item[\texttt{-o[overrides]}] Read in a file of overrides for regions. The file contains one override per line, each override comprising an Alpha-2 country code, a region code and a region name, comma separated (parsed according to usual CSV rules). If the program finds an entry on the internet for an overriden country and code, it will use the name given in the override file whatever the internet seems to say (because it just isn't worth catering for every possible variation of Wikipedia table format...)
+\item[\texttt{-p}] Put progress dots to \texttt{STDERR}
+\item[\texttt{-r[n]}] Sets the number of page load retries to \texttt{n}
+\end{description}
+
+See the program documentation for current details.
+
+\begin{description}
+\item[Note]Great Britain is not imported correctly. The region codes have to be corrected manually.
+\end{description}
+\subsection{Market List}
+Creates a CSV equivalent of the Market List table in the Schedule Database spreadsheet model. It optionally takes a table of basic country information, as produced by \verb|Countries.rb|, and will use that instead of the spreadsheet for official country names if given.
+\chapter{Database Structure}
+\section{Overview}
+The database is organised into two conceptual groups:\begin{description}
+\item[Schedule]corresponds closely with the 'Schedule database model' spreadsheet from which this database is adapted; and
+\item[Forecast] corresponds closely with the 'Air traffic forecast tool' from which this database is adapted.
+\end{description}
+\section{Schedule}
+The Schedule portion of the database is structured as an OLAP star schema, although OLAP operations are not used to extract data. The \verb|schedule| table is the fact table, and all others are dimension tables.
+\subsection{Aircraft}
+AIRCRAFT (\underline{identifier}, manufacturer, body\_type, family, aircraft\_type, equip\_code, aircraft\_name, wingspan,
+mtow, aircraft\_code, icao\_code, max\_mtow, weight\_category)
+
+Specification of aircraft types
+
+\paragraph{identifier}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]No
+	\item[Description]A unique name for the aircraft type
+	\item[Constraints]Longest value on original import was 33 characters. 50 characters allowed for field
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$J]
+	\end{description}
+\paragraph{manufacturer}
+	\begin{description}
+	\item[Type]text
+	\item[Can be null?]Yes
+	\item[Description]The aircraft manufacturer
+	\item[Constraints]Longest value on original import was 17 characters. 25 characters allowed for field.
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$A]
+	\end{description}
+\paragraph{body\_type}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]Yes
+	\item[Description]The aircraft body type
+	\item[Constraints]Longest value on original import was 10 characters. 15 characters allowed for field
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$B]
+	\end{description}
+\paragraph{family}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]Yes
+	\item[Description]The aircraft family
+	\item[Constraints]Longest value on original import was 19 characters. 25 characters allowed for field.
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$C]
+	\end{description}
+\paragraph{aircraft\_type}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]Yes
+	\item[Description]The aircraft type name
+	\item[Constraints]Longest value on original import was 29 characters. 40 characters allowed for field
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$D]
+	\end{description}
+\paragraph{equip\_code}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]Yes
+	\item[Description]The aircraft equipment code (note: not unique)
+	\item[Constraints]Length = 3
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$E]
+	\end{description}
+\paragraph{aircraft\_name}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]Yes
+	\item[Description]The name of the aircraft type (note: not unique).
+	\item[Constraints]Longest value on original import was 39 characters. 50 characters allowed for field
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$F]
+	\end{description}
+\paragraph{wingspan}
+	\begin{description}
+	\item[Type]Decimal
+	\item[Can be null?]Yes
+	\item[Description]The aircraft wingspan in metres (null if not fixed-wing).
+	\item[Constraints]Scale = 2
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$G]
+	\end{description}
+\paragraph{mtow}
+\label{mtow}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]Yes
+	\item[Description]Maximum take off weight. In some cases this is a range of weights, presumably relating to different configurations, so the field is stored in a string rather than a numeric type.
+	\item[Constraints]Longest value on original import was 24 characters. 30 characters allowed for field
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$H]
+	\end{description}
+\paragraph{aircraft\_code}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]Yes
+	\item[Description]Aircraft type code (usually corresponds to icao\_code [\ref{subsec:icaocode}])
+	\item[Constraints]Length = 1
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$I]
+	\end{description}
+\paragraph{icao\_code}
+\label{subsec:icaocode}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]Yes
+	\item[Description]Aircraft ICAO design group code.
+	\item[Constraints]Longest value on original import was 10 characters. 15 characters allowed for field.
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$K]
+	\end{description}
+\paragraph{max\_mtow}
+	\begin{description}
+	\item[Type]Integer
+	\item[Can be null?]Yes
+	\item[Description]The maximum take-off weight. If the mtow field [\ref{mtow}] is a range, this represents the maximum value of the range, otherwise it should be identical to Mtow but expressed as a numeric type. Consistency with the mtow field is not checked or maintained
+	\item[Constraints]None
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$L]
+	\end{description}
+\paragraph{weight\_category} 
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]Yes
+	\item[Description]The ICAO weight category
+	\item[Constraints]Longest value on original import was 23 characters. 30 characters allowed for field.
+	\item[Source]Originally imported from [Schedule database model]![Aircraft List]![\$M]
+	\end{description}
+\subsection{Airport}
+AIRPORT (\underline{code}, \dotuline{country\_id}, name, city, \dotuline{region\_id}, latitude, longitude, wac, notes)
+\begin{itemize}
+\item belongs\_to country
+\item has\_many projects
+\item has\_many scenarios
+\end{itemize}
+
+\paragraph{code}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]No
+	\item[Description]The IATA code for the airport
+	\item[Constraints]Length = 3
+	\item[Source]Originally imported from [Schedule database model]![Airport List]![\$A]
+	\end{description}
+\paragraph{name}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]No
+	\item[Description]The airport name
+	\item[Constraints]Maximum length in source data was 50. 75 allowed.
+	\item[Source]Originally imported from [Schedule database model]
+	\end{description}
+\paragraph{city}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]No
+	\item[Description]The city served by the airport
+	\item[Constraints]Maximum length in source data was 50. 50 allowed.
+	\item[Source]
+	\end{description}
+\paragraph{state}
+	\begin{description}
+	\item[Type]
+	\item[Can be null?]
+	\item[Description]
+	\item[Constraints]
+	\item[Source]
+	\end{description}
+\paragraph{latitude}
+	\begin{description}
+	\item[Type]
+	\item[Can be null?]
+	\item[Description]
+	\item[Constraints]
+	\item[Source]
+	\end{description}
+\paragraph{longitude}
+	\begin{description}
+	\item[Type]
+	\item[Can be null?]
+	\item[Description]
+	\item[Constraints]
+	\item[Source]
+	\end{description}
+\paragraph{region\_id}
+	\begin{description}
+	\item[Type]
+	\item[Can be null?]
+	\item[Description]
+	\item[Constraints]
+	\item[Source]
+	\end{description}
+\paragraph{wac}
+	\begin{description}
+	\item[Type]
+	\item[Can be null?]
+	\item[Description]
+	\item[Constraints]
+	\item[Source]
+	\end{description}
+\paragraph{notes}
+	\begin{description}
+	\item[Type]
+	\item[Can be null?]
+	\item[Description]
+	\item[Constraints]
+	\item[Source]
+	\end{description}
+\subsection{Country}
+COUNTRY (\underline{alpha3}, alpha2, iso\_name, srs\_name, global\_region, european\_route\_markets, eu\_member, oecd\_member, un\_member, economy)
+\begin{itemize}
+\item has\_many regions
+\item has\_many airports
+\end{itemize}
+Represents a country of the world. 
+
+Some of the ISO 3166-1 country codes relate to regions, not individual countries, and so there may be no matching entry in the SRS analyser data. Because of this, all fields derived from the SRS analyser may be NULL.
+\paragraph{alpha3} 
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]No
+	\item[Description]The ISO 3166-1 Alpha-3 code for the country.
+	\item[Constraints]Length = 3
+	\item[Source]Originally imported from the internet using the tool \texttt{import\_countries.rb}.
+\end{description}
+\paragraph{alpha2}
+	\begin{description}
+	\item[Type] Text
+	\item[Can be null?] No
+	\item[description] The ISO 3166-1 Alpha-2 code for the country.
+	\item[Constraints] Length = 2
+	\item[Source] Originally imported from the internet using the tool \texttt{import\_countries.rb}
+	\end{description}
+\paragraph{iso\_name}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]No
+	\item[Description]The ISO 3166-1 short country name. 
+	\item[Constraints]The longest value on original import was 46 characters; 75 characters allowed in the database.
+	\item[Source]Originally imported from the internet using the tool \texttt{countries.rb}.
+	\end{description}
+\paragraph{srs\_name}
+	\begin{description}
+	\item[Type] Text
+	\item[Can be null?] Yes
+	\item[Description] The country name as shown in the SRS analyser.
+	\item[Constraints] The longest value on original import was 46 characters; 75 characters allowed in the database.	
+	\item[Source] Originally imported from [ScheduleDatabaseModel]![Market List]![\$E].
+	\end{description}
+\paragraph{global\_region}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]Yes
+	\item[Description]The global region of the country, as identified in the SRS analyser.
+	\item[Constraints]The longest value on original import was 15 characters; 25 characters allowed in the database.
+	\item[Source]Originally imported from [ScheduleDatabaseModel]![Market List]![\$E].
+	\end{description}
+\paragraph{european\_route\_markets}
+	\begin{description}
+	\item[Type]Text.
+	\item[Can be null?]Yes
+	\item[Description]The European route market of the country as identified in the SRS analyser.
+	\item[Constraints]The longest value on original import was 17 characters; 25 characters allowed in the database.
+	\item[Source]Originally imported from [ScheduleDatabaseModel]![Market List]![\$F].
+	\end{description}
+\paragraph{eu\_member}
+	\begin{description}
+	\item[Type]Yes/No
+	\item[Can be null?]Yes
+	\item[Description]Whether the country is a member of the EU. 
+	\item[Constraints]None
+	\item[Source]Originally imported from [ScheduleDatabaseModel]![Market List]![\$G].
+	\end{description}
+\paragraph{oecd\_member}
+	\begin{description}
+	\item[Type]Yes/No
+	\item[Can be null?]Yes
+	\item[Description]Whether the country is a member of the OECD. 
+	\item[Constraints]None
+	\item[Source]Originally imported from [ScheduleDatabaseModel]![Market List]![\$H].
+	\end{description}
+\paragraph{un\_member}
+	\begin{description}
+	\item[Type]Yes/No
+	\item[Can be null?]Yes
+	\item[Description]Whether the country is a member of the UN. 
+	\item[Constraints]None
+	\item[Source]Originally imported from [ScheduleDatabaseModel]![Market List]![\$I].
+	\end{description}
+\paragraph{economy}
+	\begin{description}
+	\item[Type]String
+	\item[Can be null?]Yes
+	\item[Description]The type of the country's economy. 
+	\item[Constraints]"developed" | "transition" | "developing"
+	\item[Source]Originally imported from [ScheduleDatabaseModel]![Market List]![\$J].
+	\end{description}
+\subsection{Region}
+REGION (\underline{country\_id}, \underline{region\_code}, name)
+\begin{itemize}
+\item belongs\_to country
+\end{itemize}
+Represents a region of a country.
+\paragraph{country\_id}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]No
+	\item[Description]The alpha3 country identifier of the country containing this recion.
+	\item[Constraints]Length = 3
+	\item[Source]http://en.wikipedia.org/wiki/ISO\_3166-1
+	\end{description}
+\paragraph{region\_id}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]No
+	\item[Description]The ISO 3166-2 region code
+	\item[Constraints]Length $\le$ 3
+	\item[Source]Pages linked from http://en.wikipedia.org/wiki/ISO\_3166-1
+	\end{description}
+\paragraph{name}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]No
+	\item[Description]The name of the region
+	\item[Constraints]The longest entry on original import was 15 characters. 25 characters allowed in database.
+	\item[Source]
+	\end{description}
+\section{Forecast}
+\subsection{Project}
+PROJECT (\underline{name}, airport\_id)
+\begin{itemize}
+\item has\_many users
+\item has\_many scenarios
+\end{itemize}
+A project is a package for multiple scenarios.
+
+\paragraph{name}
+	\begin{description}
+	\item[Type]String
+	\item[Can be null?]No
+	\item[Description]The project name
+	\item[Constraints]None
+	\item[Source]Created by the DBA
+	\end{description}
+\paragraph{airport\_id}
+	\begin{description}
+	\item[Type]Application defined
+	\item[Can be null?]No
+	\item[Description]The airport
+	\item[Constraints]None
+	\item[Source]Created by the DBA
+	\end{description}
+\subsection{Scenario}
+SCENARIO (\underline{name}, base\_year, min\_r2, local\_res\_domestic, local\_res\_international, dom\_developed\_elasticity, short\_developed\_elasticity, short\_developing\_elasticity, medium\_developed\_elasticity, medium\_developing\_elasticity, long\_developed\_elasticity, long\_developing\_elasticity, ultra\_developed\_elasticity, ultra\_developing\_elasticity, dom\_developed\_saturation, short\_developed\_saturation, short\_developing\_saturation, medium\_developed\_saturation, medium\_developing\_saturation, long\_developed\_saturation, long\_developing\_saturation, ultra\_developed\_saturation, ultra\_developing\_saturation)
+\begin{itemize}
+\item scenario belongs\_to project
+\item scenario has\_many airports
+\end{itemize}
+\paragraph{name}
+	\begin{description}
+	\item[Type]Text
+	\item[Can be null?]No
+	\item[Description]A name for the scenario
+	\item[Constraints]None
+	\item[Source]Created by the user
+	\end{description}
+
+\subsection{User}
+USER (\underline{name}, admin, password\_digest)
+\begin{itemize}
+\item has\_many projects
+\end{itemize}
+A user is simply a person who is authorised to use the tool.
+\paragraph{name}
+	\begin{description}
+	\item[Type]String
+	\item[Can be null?]No
+	\item[Description]The user name
+	\item[Constraints]None
+	\item[Source]Created by the DBA
+	\end{description}
+\paragraph{admin}
+	\begin{description}
+	\item[Type]Boolean
+	\item[Can be null?]No
+	\item[Description]Whether the user has admin privileges
+	\item[Constraints]None
+	\item[Source]Created by the DBA
+	\end{description}
+\paragraph{password\_digest}
+	\begin{description}
+	\item[Type]String
+	\item[Can be null?]No
+	\item[Description]A secure code used to test the user password
+	\item[Constraints]None
+	\item[Source]Created (indirectly) by the DBA
+	\end{description}
+\end{document} 	

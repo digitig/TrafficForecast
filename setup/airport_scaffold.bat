@@ -1,0 +1,1 @@
+rails generate scaffold Airport code:text name:text city:text state:text latitude:float longitude:float wac:integer notes:text country:belongs_to

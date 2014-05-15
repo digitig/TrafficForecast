@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @airport.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @airport.name %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @airport.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @airport.state %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @airport.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @airport.longitude %>
+</p>
+
+<p>
+  <strong>Wac:</strong>
+  <%= @airport.wac %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @airport.notes %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @airport.country %>
+</p>
+
+<%= link_to 'Edit', edit_airport_path(@airport) %> |
+<%= link_to 'Back', airports_path %>

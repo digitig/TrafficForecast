@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Traffic Forecaster</title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body class='<%= controller.controller_name %>'>
+<div id="banner">
+  <div id="header">
+	<div class="title">Traffic Forecaster</div>
+	<div class="subtitle"><%= page_title %></div>
+  </div>
+  <div id="logo">
+	<%= image_tag("logo.gif", :alt => "Logo, when we're willing to put our name to it") %>
+  </div>
+</div>
+<div id="navigation">
+  <ul>
+	<li><a href="www.???">Projects</a></li>
+	<li><a href="www.???">Scenarios</a></li>
+  </ul>
+</div>
+<div id="content">
+  <%= yield %>
+</div>
+</body>
+</html>

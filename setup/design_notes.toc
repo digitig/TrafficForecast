@@ -1,0 +1,61 @@
+\contentsline {chapter}{\numberline {1}Introduction}{4}
+\contentsline {chapter}{\numberline {2}Populating Data}{5}
+\contentsline {section}{\numberline {2.1}General}{5}
+\contentsline {section}{\numberline {2.2}Support Tools}{5}
+\contentsline {subsection}{\numberline {2.2.1}Airports}{5}
+\contentsline {subsection}{\numberline {2.2.2}Countries}{6}
+\contentsline {subsection}{\numberline {2.2.3}Regions}{6}
+\contentsline {subsection}{\numberline {2.2.4}Market List}{7}
+\contentsline {chapter}{\numberline {3}Database Structure}{8}
+\contentsline {section}{\numberline {3.1}Overview}{8}
+\contentsline {section}{\numberline {3.2}Schedule}{8}
+\contentsline {subsection}{\numberline {3.2.1}Aircraft}{8}
+\contentsline {paragraph}{identifier}{8}
+\contentsline {paragraph}{manufacturer}{9}
+\contentsline {paragraph}{body\_type}{9}
+\contentsline {paragraph}{family}{9}
+\contentsline {paragraph}{aircraft\_type}{9}
+\contentsline {paragraph}{equip\_code}{10}
+\contentsline {paragraph}{aircraft\_name}{10}
+\contentsline {paragraph}{wingspan}{10}
+\contentsline {paragraph}{mtow}{10}
+\contentsline {paragraph}{aircraft\_code}{11}
+\contentsline {paragraph}{icao\_code}{11}
+\contentsline {paragraph}{max\_mtow}{11}
+\contentsline {paragraph}{weight\_category}{11}
+\contentsline {subsection}{\numberline {3.2.2}Airport}{12}
+\contentsline {paragraph}{code}{12}
+\contentsline {paragraph}{country\_id}{12}
+\contentsline {paragraph}{name}{12}
+\contentsline {paragraph}{city}{13}
+\contentsline {paragraph}{state}{13}
+\contentsline {paragraph}{latitude}{13}
+\contentsline {paragraph}{longitude}{13}
+\contentsline {paragraph}{region\_id}{14}
+\contentsline {paragraph}{wac}{14}
+\contentsline {paragraph}{notes}{14}
+\contentsline {subsection}{\numberline {3.2.3}Country}{14}
+\contentsline {paragraph}{alpha3}{15}
+\contentsline {paragraph}{alpha2}{15}
+\contentsline {paragraph}{iso\_name}{15}
+\contentsline {paragraph}{srs\_name}{15}
+\contentsline {paragraph}{global\_region}{16}
+\contentsline {paragraph}{european\_route\_markets}{16}
+\contentsline {paragraph}{eu\_member}{16}
+\contentsline {paragraph}{oecd\_member}{16}
+\contentsline {paragraph}{un\_member}{17}
+\contentsline {paragraph}{economy}{17}
+\contentsline {subsection}{\numberline {3.2.4}Region}{17}
+\contentsline {paragraph}{country\_id}{17}
+\contentsline {paragraph}{region\_id}{17}
+\contentsline {paragraph}{name}{18}
+\contentsline {section}{\numberline {3.3}Forecast}{18}
+\contentsline {subsection}{\numberline {3.3.1}Project}{18}
+\contentsline {paragraph}{name}{18}
+\contentsline {paragraph}{airport\_id}{18}
+\contentsline {subsection}{\numberline {3.3.2}Scenario}{19}
+\contentsline {paragraph}{name}{19}
+\contentsline {subsection}{\numberline {3.3.3}User}{19}
+\contentsline {paragraph}{name}{19}
+\contentsline {paragraph}{admin}{20}
+\contentsline {paragraph}{password\_digest}{20}

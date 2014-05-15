@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyText
+  name: MyText
+  city: MyText
+  state: MyText
+  latitude: 1.5
+  longitude: 1.5
+  wac: 1
+  notes: MyText
+  country_id: 
+
+two:
+  code: MyText
+  name: MyText
+  city: MyText
+  state: MyText
+  latitude: 1.5
+  longitude: 1.5
+  wac: 1
+  notes: MyText
+  country_id: 
