@@ -1,0 +1,1 @@
+rails generate scaffold User name:text admin:boolean password:digest

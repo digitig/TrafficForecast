@@ -7,20 +7,18 @@
       <th>Name</th>
       <th>Country</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @regions.each do |region| %>
-      <tr>
+      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
         <td><%= region.region_code %></td>
         <td><%= region.name %></td>
-        <td><%= region.country %></td>
-        <td><%= link_to 'Show', region %></td>
-        <td><%= link_to 'Edit', edit_region_path(region) %></td>
-        <td><%= link_to 'Destroy', region, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= region.country.iso_name %></td>
+        <td class="list_actions"><%= link_to 'Show', region %><br/>
+        <%= link_to 'Edit', edit_region_path(region) %><br/>
+        <%= link_to 'Destroy', region, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

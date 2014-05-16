@@ -1,0 +1,1 @@
+rails generate scaffold Project name:text client:text airport:belongs_to

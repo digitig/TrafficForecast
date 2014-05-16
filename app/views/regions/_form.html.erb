@@ -1,29 +1,31 @@
 <%= form_for(@region) do |f| %>
-  <% if @region.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@region.errors.count, "error") %> prohibited this region from being saved:</h2>
+	<% if @region.errors.any? %>
+		<div id="error_explanation">
+		  <h2><%= pluralize(@region.errors.count, "error") %> prohibited this region from being saved:</h2>
 
-      <ul>
-      <% @region.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+		  <ul>
+			<% @region.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		  </ul>
+		</div>
+	<% end %>
 
-  <div class="field">
-    <%= f.label :region_code %><br>
-    <%= f.text_area :region_code %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_area :name %>
-  </div>
-  <div class="field">
-    <%= f.label :country_id %><br>
-    <%= f.text_field :country_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<table>
+	  <tr>
+		<td><%= f.label :region_code %></td>
+		<td><%= f.text_field :region_code %></td>
+	  </tr>
+	  <tr>
+		<td><%= f.label :name %></td>
+		<td><%= f.text_field :name %></td>
+	  </tr>
+	  <tr>
+		<td><%= f.label :country_id %></td>
+		<td><%= f.text_field :country_id %></td>
+	  </tr>
+	</table>
+	<div class="actions">
+	  <%= f.submit %>
+	</div>
 <% end %>

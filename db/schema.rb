@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516081910) do
+ActiveRecord::Schema.define(version: 20140516092402) do
 
   create_table "airports", force: true do |t|
     t.text     "code",       limit: 3,  null: false
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 20140516081910) do
     t.datetime "updated_at"
   end
 
+  create_table "projects", force: true do |t|
+    t.text     "name"
+    t.text     "client"
+    t.integer  "airport_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "projects", ["airport_id"], name: "index_projects_on_airport_id"
+
   create_table "regions", force: true do |t|
     t.text     "region_code", limit: 3,  null: false
     t.text     "name",        limit: 25, null: false
@@ -69,6 +79,14 @@ ActiveRecord::Schema.define(version: 20140516081910) do
     t.text "parentName"
     t.text "propertyName"
     t.text "propertyValue"
+  end
+
+  create_table "users", force: true do |t|
+    t.text     "name"
+    t.boolean  "admin"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

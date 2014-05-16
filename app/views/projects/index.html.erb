@@ -1,0 +1,31 @@
+<% @page_title = 'Projects' %>
+
+<table>
+  <thead>
+  <tr>
+	<th>Name</th>
+	<th>Client</th>
+	<th>Airport</th>
+	<th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @projects.each do |project| %>
+	  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+		<td><%= project.name %></td>
+		<td><%= project.client %></td>
+		<td><%= project.airport %></td>
+		<td class="list_actions"><%= link_to 'Show', project %>
+		  <br/>
+		  <%= link_to 'Edit', edit_project_path(project) %>
+		  <br/>
+		  <%= link_to 'Destroy', project, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+	  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project', new_project_path %>
