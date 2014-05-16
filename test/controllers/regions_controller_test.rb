@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RegionsControllerTest < ActionController::TestCase
   setup do
-    @region = regions(:one)
+    @region = regions(:bds)
   end
 
   test "should get index" do

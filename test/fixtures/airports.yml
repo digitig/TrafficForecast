@@ -1,23 +1,22 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  code: MyText
-  name: MyText
-  city: MyText
-  state: MyText
-  latitude: 1.5
-  longitude: 1.5
-  wac: 1
-  notes: MyText
-  country_id: 
+bin:
+  code: 'BIN'
+  name: 'Bamyan'
+  city: 'Bamyan'
+  #state: MyText
+  latitude: 34.8
+  longitude: 67.82
+  wac: 701
+  country_id: 1
 
 two:
-  code: MyText
-  name: MyText
-  city: MyText
-  state: MyText
-  latitude: 1.5
-  longitude: 1.5
-  wac: 1
-  notes: MyText
-  country_id: 
+  code: 'BST'
+  name: 'Bost'
+  city: 'Lashkar Gah'
+  #state: MyText
+  latitude: 31.55
+  longitude: 64.37
+  wac: 701
+  notes: 'the city of Bost is now Lashkar Gah in Dec-11'
+  country_id: 1

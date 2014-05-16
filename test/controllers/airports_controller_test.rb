@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AirportsControllerTest < ActionController::TestCase
   setup do
-    @airport = airports(:one)
+    @airport = airports(:bin)
   end
 
   test "should get index" do

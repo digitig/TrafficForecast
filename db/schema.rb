@@ -64,23 +64,6 @@ ActiveRecord::Schema.define(version: 20140516092402) do
 
   add_index "regions", ["country_id"], name: "index_regions_on_country_id"
 
-  create_table "sqlite_sp_functions", id: false, force: true do |t|
-    t.text "name"
-    t.text "text"
-  end
-
-  create_table "sqlite_vs_links_names", id: false, force: true do |t|
-    t.text "name"
-    t.text "alias"
-  end
-
-  create_table "sqlite_vs_properties", id: false, force: true do |t|
-    t.text "parentType"
-    t.text "parentName"
-    t.text "propertyName"
-    t.text "propertyValue"
-  end
-
   create_table "users", force: true do |t|
     t.text     "name"
     t.boolean  "admin"
