@@ -1,8 +1,14 @@
+#encoding: utf-8
 require 'test_helper'
 
 class RegionsControllerTest < ActionController::TestCase
   setup do
     @region = regions(:bds)
+    @update = {
+        region_code: 'BGL',
+        name: 'Baghlān',
+        country_id: 1
+    }
   end
 
   test "should get index" do
@@ -18,7 +24,7 @@ class RegionsControllerTest < ActionController::TestCase
 
   test "should create region" do
     assert_difference('Region.count') do
-      post :create, region: { country_id: @region.country_id, name: @region.name, region_code: @region.region_code }
+      post :create, region: @update
     end
 
     assert_redirected_to region_path(assigns(:region))
@@ -35,7 +41,7 @@ class RegionsControllerTest < ActionController::TestCase
   end
 
   test "should update region" do
-    patch :update, id: @region, region: { country_id: @region.country_id, name: @region.name, region_code: @region.region_code }
+    patch :update, id: @region, region: @update
     assert_redirected_to region_path(assigns(:region))
   end
 
