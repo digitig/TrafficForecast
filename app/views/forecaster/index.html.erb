@@ -1,0 +1,14 @@
+<% @page_title = 'Projects' %>
+<% if notice %>
+	<p id="notice"><%= notice %></p>
+<% end %>
+<% if @projects.count > 0 %>
+<% @projects.each do |project| %>
+	<div class="entry">
+	  <h3><%= project.name %></h3>
+	  <p><%= project.airport.name %></p>
+	</div>
+<% end %>
+<% else %>
+	<h1>No projects defined</h1>
+<% end %>

@@ -19,21 +19,26 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+
   end
 
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
-
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @project }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+    airport = Airport.find_by(code: params[:project][:code])
+    if airport
+      @project = airport.projects.new(project_params)
+      respond_to do |format|
+        if @project.save
+          format.html { redirect_to @project, notice: 'Project was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @project }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @project.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      # TODO Error response
     end
   end
 
@@ -62,13 +67,13 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:name, :client, :airport_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:name, :client, :airport_id)
+  end
 end

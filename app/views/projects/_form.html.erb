@@ -1,30 +1,34 @@
 <%= form_for(@project) do |f| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+	<% if @project.errors.any? %>
+		<div id="error_explanation">
+		  <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-      <ul>
-      <% @project.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-<table>
-  <tr>
-	<td><%= f.label :name %></td>
-	<td><%= f.text_field :name %></td>
-  </tr>
-  <tr>
-	<td><%= f.label :client %></td>
-	<td><%= f.text_field :client %></td>
-  </tr>
-  <tr>
-	<td><%= f.label :airport_id %></td>
-	<td><%= f.text_field :airport_id %></td>
-  </tr>
-</table>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+		  <ul>
+			<% @project.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		  </ul>
+		</div>
+	<% end %>
+	<table>
+	  <tr>
+		<td><%= f.label :name %></td>
+		<td><%= f.text_field :name %></td>
+	  </tr>
+	  <tr>
+		<td><%= f.label :client %></td>
+		<td><%= f.text_field :client %></td>
+	  </tr>
+	  <tr>
+		<td><label for="code">Airport identifier</label></td>
+		<td><input type="text" id="code" name="project[code]" class="code_input"
+				   <% if @project.airport %>
+		value=<%= @project.airport.code %>
+		<% end %> />
+		</td>
+	  </tr>
+	</table>
+	<div class="actions">
+	  <%= f.submit %>
+	</div>
 <% end %>
