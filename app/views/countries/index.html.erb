@@ -1,0 +1,46 @@
+<table>
+  <thead>
+  <tr>
+	<th>Alpha3</th>
+	<th>Alpha2</th>
+	<th>Iso name</th>
+	<th>Srs name</th>
+	<th>Global region</th>
+	<th>European route markets</th>
+	<th>Eu member</th>
+	<th>Oecd member</th>
+	<th>Un member</th>
+	<th>Economy</th>
+	<th></th>
+	<th></th>
+	<th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @countries.each do |country| %>
+	  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+		<td><%= country.alpha3 %></td>
+		<td><%= country.alpha2 %></td>
+		<td><%= country.iso_name %></td>
+		<td><%= country.srs_name %></td>
+		<td><%= country.global_region %></td>
+		<td><%= country.european_route_markets %></td>
+		<td><%= country.eu_member %></td>
+		<td><%= country.oecd_member %></td>
+		<td><%= country.un_member %></td>
+		<td><%= country.economy %></td>
+		<td class="list_actions">
+		  <%= link_to 'Show', country %><br/>
+
+		  <%= link_to 'Edit', edit_country_path(country) %><br/>
+
+		  <%= link_to 'Destroy', country, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+	  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Country', new_country_path %>

@@ -1,0 +1,58 @@
+<%= form_for(@country) do |f| %>
+  <% if @country.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@country.errors.count, "error") %> prohibited this country from being saved:</h2>
+
+      <ul>
+      <% @country.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<table>
+  <tr>
+	<td><%= f.label :alpha3 %></td>
+	<td><%= f.text_field :alpha3 %></td>
+  </tr>
+  <tr>
+	<td><%= f.label :alpha2 %></td>
+	<td><%= f.text_field :alpha2 %></td>
+  </tr>
+  <tr>
+	<td><%= f.label :iso_name %></td>
+	<td><%= f.text_field :iso_name %></td>
+  </tr>
+  <tr>
+	<td><%= f.label :srs_name %></td>
+	<td><%= f.text_field :srs_name %></td>
+  </tr>
+  <tr>
+	<td><%= f.label :global_region %></td>
+	<td><%= f.text_field :global_region %></td>
+  </tr>
+  <tr>
+	<td><%= f.label :european_route_markets %></td>
+	<td><%= f.text_field :european_route_markets %></td>
+  </tr>
+  <tr>
+	<td><%= f.label :eu_member %></td>
+	<td><%= f.check_box :eu_member %></td>
+  </tr>
+  <tr>
+	<td><%= f.label :oecd_member %></td>
+	<td><%= f.check_box :oecd_member %></td>
+  </tr>
+  <tr>
+	<td><%= f.label :un_member %></td>
+	<td><%= f.check_box :un_member %></td>
+  </tr>
+  <tr>
+	<td><%= f.label :economy %></td>
+	<td><%= f.text_field :economy %></td>
+  </tr>
+</table>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

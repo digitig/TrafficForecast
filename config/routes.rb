@@ -1,4 +1,8 @@
 TrafficForecast::Application.routes.draw do
+  resources :regions
+
+  resources :countries
+
   resources :airports
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Alpha3:</strong>
+  <%= @country.alpha3 %>
+</p>
+
+<p>
+  <strong>Alpha2:</strong>
+  <%= @country.alpha2 %>
+</p>
+
+<p>
+  <strong>Iso name:</strong>
+  <%= @country.iso_name %>
+</p>
+
+<p>
+  <strong>Srs name:</strong>
+  <%= @country.srs_name %>
+</p>
+
+<p>
+  <strong>Global region:</strong>
+  <%= @country.global_region %>
+</p>
+
+<p>
+  <strong>European route markets:</strong>
+  <%= @country.european_route_markets %>
+</p>
+
+<p>
+  <strong>Eu member:</strong>
+  <%= @country.eu_member %>
+</p>
+
+<p>
+  <strong>Oecd member:</strong>
+  <%= @country.oecd_member %>
+</p>
+
+<p>
+  <strong>Un member:</strong>
+  <%= @country.un_member %>
+</p>
+
+<p>
+  <strong>Economy:</strong>
+  <%= @country.economy %>
+</p>
+
+<%= link_to 'Edit', edit_country_path(@country) %> |
+<%= link_to 'Back', countries_path %>

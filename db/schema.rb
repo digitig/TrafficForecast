@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140515213954) do
+ActiveRecord::Schema.define(version: 20140516081910) do
 
   create_table "airports", force: true do |t|
     t.text     "code",       limit: 3,  null: false
@@ -28,5 +28,47 @@ ActiveRecord::Schema.define(version: 20140515213954) do
   end
 
   add_index "airports", ["country_id"], name: "index_airports_on_country_id"
+
+  create_table "countries", force: true do |t|
+    t.text     "alpha3",                 limit: 3,  null: false
+    t.text     "alpha2",                 limit: 2
+    t.text     "iso_name",               limit: 75, null: false
+    t.text     "srs_name",               limit: 75
+    t.text     "global_region",          limit: 25
+    t.text     "european_route_markets", limit: 25
+    t.boolean  "eu_member"
+    t.boolean  "oecd_member"
+    t.boolean  "un_member"
+    t.text     "economy",                limit: 10
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "regions", force: true do |t|
+    t.text     "region_code", limit: 3,  null: false
+    t.text     "name",        limit: 25, null: false
+    t.integer  "country_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "regions", ["country_id"], name: "index_regions_on_country_id"
+
+  create_table "sqlite_sp_functions", id: false, force: true do |t|
+    t.text "name"
+    t.text "text"
+  end
+
+  create_table "sqlite_vs_links_names", id: false, force: true do |t|
+    t.text "name"
+    t.text "alias"
+  end
+
+  create_table "sqlite_vs_properties", id: false, force: true do |t|
+    t.text "parentType"
+    t.text "parentName"
+    t.text "propertyName"
+    t.text "propertyValue"
+  end
 
 end

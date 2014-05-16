@@ -32,11 +32,11 @@
 		<td><%= airport.wac %></td>
 		<td><%= airport.notes %></td>
 		<td class="list_actions">
-		  <p><%= link_to 'Show', airport %></p>
-
-		  <p><%= link_to 'Edit', edit_airport_path(airport) %></p>
-
-		  <p><%= link_to 'Destroy', airport, method: :delete, data: {confirm: 'Are you sure?'} %></p>
+		  <%= link_to 'Show', airport %>
+		  <br/>
+		  <%= link_to 'Edit', edit_airport_path(airport) %>
+		  <br/>
+		  <%= link_to 'Destroy', airport, method: :delete, data: {confirm: 'Are you sure?'} %>
 	  </tr>
   <% end %>
   </tbody>

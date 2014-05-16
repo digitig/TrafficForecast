@@ -1,0 +1,1 @@
+rails generate scaffold Country alpha3:text alpha2:text iso_name:text srs_name:text global_region:text european_route_markets:text eu_member:boolean oecd_member:boolean un_member:boolean economy:text

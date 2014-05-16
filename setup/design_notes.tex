@@ -226,47 +226,47 @@ AIRPORT (\underline{code}, \dotuline{country\_id}, name, city, \dotuline{region\
 	\end{description}
 \paragraph{state}
 	\begin{description}
-	\item[Type]
-	\item[Can be null?]
-	\item[Description]
-	\item[Constraints]
+	\item[Type]Text
+	\item[Can be null?]Yes
+	\item[Description]The region the airport serves
+	\item[Constraints]Length = 3
 	\item[Source]
 	\end{description}
 \paragraph{latitude}
 	\begin{description}
-	\item[Type]
-	\item[Can be null?]
-	\item[Description]
-	\item[Constraints]
+	\item[Type]float
+	\item[Can be null?]yes
+	\item[Description]Latitude of the airport
+	\item[Constraints]>=-180, <=180
 	\item[Source]
 	\end{description}
 \paragraph{longitude}
 	\begin{description}
-	\item[Type]
-	\item[Can be null?]
-	\item[Description]
-	\item[Constraints]
+	\item[Type]float
+	\item[Can be null?]yes
+	\item[Description]Longitude of airport
+	\item[Constraints]=-180, <=180
 	\item[Source]
 	\end{description}
 \paragraph{region\_id}
 	\begin{description}
-	\item[Type]
-	\item[Can be null?]
-	\item[Description]
-	\item[Constraints]
+	\item[Type]text
+	\item[Can be null?]yes
+	\item[Description]Alpha code for region. Note: not the rails-generated id
+	\item[Constraints]length <= 3
 	\item[Source]
 	\end{description}
 \paragraph{wac}
 	\begin{description}
-	\item[Type]
-	\item[Can be null?]
-	\item[Description]
+	\item[Type]Integer
+	\item[Can be null?]yes
+	\item[Description]World airport code
 	\item[Constraints]
 	\item[Source]
 	\end{description}
 \paragraph{notes}
 	\begin{description}
-	\item[Type]
+	\item[Type]Text
 	\item[Can be null?]
 	\item[Description]
 	\item[Constraints]
@@ -292,7 +292,7 @@ Some of the ISO 3166-1 country codes relate to regions, not individual countries
 \paragraph{alpha2}
 	\begin{description}
 	\item[Type] Text
-	\item[Can be null?] No
+	\item[Can be null?] Yes
 	\item[description] The ISO 3166-1 Alpha-2 code for the country.
 	\item[Constraints] Length = 2
 	\item[Source] Originally imported from the internet using the tool \texttt{import\_countries.rb}
