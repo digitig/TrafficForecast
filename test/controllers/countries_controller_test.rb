@@ -3,6 +3,19 @@ require 'test_helper'
 class CountriesControllerTest < ActionController::TestCase
   setup do
     @country = countries(:afg)
+    @update = {
+        id: 3,
+        alpha3: 'ALB',
+        alpha2: 'AL',
+        iso_name: 'Albania',
+        srs_name: 'Albania',
+        global_region: 'Europe',
+        european_route_markets: 'Other European',
+        eu_member: false,
+        oecd_member: false,
+        un_member: false,
+        economy: 'Developing'
+    }
   end
 
   test "should get index" do
@@ -18,7 +31,7 @@ class CountriesControllerTest < ActionController::TestCase
 
   test "should create country" do
     assert_difference('Country.count') do
-      post :create, country: { alpha2: @country.alpha2, alpha3: @country.alpha3, economy: @country.economy, eu_member: @country.eu_member, european_route_markets: @country.european_route_markets, global_region: @country.global_region, iso_name: @country.iso_name, oecd_member: @country.oecd_member, srs_name: @country.srs_name, un_member: @country.un_member }
+      post :create, country: @update
     end
 
     assert_redirected_to country_path(assigns(:country))
@@ -35,7 +48,7 @@ class CountriesControllerTest < ActionController::TestCase
   end
 
   test "should update country" do
-    patch :update, id: @country, country: { alpha2: @country.alpha2, alpha3: @country.alpha3, economy: @country.economy, eu_member: @country.eu_member, european_route_markets: @country.european_route_markets, global_region: @country.global_region, iso_name: @country.iso_name, oecd_member: @country.oecd_member, srs_name: @country.srs_name, un_member: @country.un_member }
+    patch :update, id: @country, country: @update
     assert_redirected_to country_path(assigns(:country))
   end
 

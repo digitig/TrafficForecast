@@ -3,6 +3,16 @@ require 'test_helper'
 class AirportsControllerTest < ActionController::TestCase
   setup do
     @airport = airports(:bin)
+    @update = {
+        code: 'CCN',
+        name: 'Chaghcharan',
+        city: 'Chaghcharan',
+        #state: MyText
+        latitude: 34.53,
+        longitude: 65.27,
+        wac: 701,
+        country_id: 1
+    }
   end
 
   test "should get index" do
@@ -18,7 +28,7 @@ class AirportsControllerTest < ActionController::TestCase
 
   test "should create airport" do
     assert_difference('Airport.count') do
-      post :create, airport: { city: @airport.city, code: @airport.code, country_id: @airport.country_id, latitude: @airport.latitude, longitude: @airport.longitude, name: @airport.name, notes: @airport.notes, state: @airport.state, wac: @airport.wac }
+      post :create, airport: @update
     end
 
     assert_redirected_to airport_path(assigns(:airport))
@@ -35,7 +45,7 @@ class AirportsControllerTest < ActionController::TestCase
   end
 
   test "should update airport" do
-    patch :update, id: @airport, airport: { city: @airport.city, code: @airport.code, country_id: @airport.country_id, latitude: @airport.latitude, longitude: @airport.longitude, name: @airport.name, notes: @airport.notes, state: @airport.state, wac: @airport.wac }
+    patch :update, id: @airport, airport: @update
     assert_redirected_to airport_path(assigns(:airport))
   end
 

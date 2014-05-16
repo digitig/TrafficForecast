@@ -10,7 +10,7 @@ bin:
   wac: 701
   country_id: 1
 
-two:
+bst:
   code: 'BST'
   name: 'Bost'
   city: 'Lashkar Gah'
