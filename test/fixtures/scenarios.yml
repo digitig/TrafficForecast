@@ -1,0 +1,55 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 'Base case'
+  base_year: 2010
+  dom_on_dom: 100
+  dom_on_int: 50
+  min_r2: 0.85
+  el_dom_developed: 1.3
+  el_short_developed: 1.3
+  el_medium_developed: 1.4
+  el_long_developed: 1.5
+  el_ultra_developed: 2.2
+  el_short_developing: 1.8
+  el_medium_developing: 1.8
+  el_long_developing: 2
+  el_ultra_developing: 2.5
+  sat_dom_developed: 2030
+  sat_short_developed: 2030
+  sat_medium_developed: 2030
+  sat_long_developed: 2030
+  sat_ultra_developed: 2030
+  sat_short_developing: 2040
+  sat_medium_developing: 2040
+  sat_long_developing: 2040
+  sat_ultra_developing: 2040
+  optimal_load_factor: 85
+  project_id: 1
+
+two:
+  name: 'Base case'
+  base_year: 2010
+  dom_on_dom: 100
+  dom_on_int: 50
+  min_r2: 0.85
+  el_dom_developed: 1.3
+  el_short_developed: 1.3
+  el_medium_developed: 1.4
+  el_long_developed: 1.5
+  el_ultra_developed: 2.2
+  el_short_developing: 1.8
+  el_medium_developing: 1.8
+  el_long_developing: 2
+  el_ultra_developing: 2.5
+  sat_dom_developed: 2030
+  sat_short_developed: 2030
+  sat_medium_developed: 2030
+  sat_long_developed: 2030
+  sat_ultra_developed: 2030
+  sat_short_developing: 2040
+  sat_medium_developing: 2040
+  sat_long_developing: 2040
+  sat_ultra_developing: 2040
+  optimal_load_factor: 85
+  project_id: 2

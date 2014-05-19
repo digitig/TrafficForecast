@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 bin:
+  id: 1
   code: 'BIN'
   name: 'Bamyan'
   city: 'Bamyan'
@@ -11,6 +12,7 @@ bin:
   country_id: 1
 
 bst:
+  id: 2
   code: 'BST'
   name: 'Bost'
   city: 'Lashkar Gah'

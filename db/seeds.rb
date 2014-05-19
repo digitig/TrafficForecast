@@ -7,8 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 puts 'seeding countries...'
 load 'db/seeds/country_seeds.rb'
-#puts 'seeding airports...'
-#load 'db/seeds/airport_seeds.rb'
-#puts 'seeding regions...'
-#load 'db/seeds/region_seeds.rb'
+puts 'seeding airports...'
+load 'db/seeds/airport_seeds.rb'
+puts 'seeding regions...'
+load 'db/seeds/region_seeds.rb'
 puts 'done.'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516092402) do
+ActiveRecord::Schema.define(version: 20140516171347) do
 
   create_table "airports", force: true do |t|
     t.text     "code",       limit: 3,  null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140516092402) do
   end
 
   create_table "projects", force: true do |t|
-    t.text     "name"
+    t.text     "name",       null: false
     t.text     "client"
     t.integer  "airport_id"
     t.datetime "created_at"
@@ -64,10 +64,42 @@ ActiveRecord::Schema.define(version: 20140516092402) do
 
   add_index "regions", ["country_id"], name: "index_regions_on_country_id"
 
+  create_table "scenarios", force: true do |t|
+    t.text     "name",                  null: false
+    t.integer  "base_year",             null: false
+    t.float    "dom_on_dom",            null: false
+    t.float    "dom_on_int",            null: false
+    t.float    "min_r2",                null: false
+    t.float    "el_dom_developed",      null: false
+    t.float    "el_short_developed",    null: false
+    t.float    "el_medium_developed",   null: false
+    t.float    "el_long_developed",     null: false
+    t.float    "el_ultra_developed",    null: false
+    t.float    "el_short_developing",   null: false
+    t.float    "el_medium_developing",  null: false
+    t.float    "el_long_developing",    null: false
+    t.float    "el_ultra_developing",   null: false
+    t.integer  "sat_dom_developed",     null: false
+    t.integer  "sat_short_developed",   null: false
+    t.integer  "sat_medium_developed",  null: false
+    t.integer  "sat_long_developed",    null: false
+    t.integer  "sat_ultra_developed",   null: false
+    t.integer  "sat_short_developing",  null: false
+    t.integer  "sat_medium_developing", null: false
+    t.integer  "sat_long_developing",   null: false
+    t.integer  "sat_ultra_developing",  null: false
+    t.float    "optimal_load_factor"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scenarios", ["project_id"], name: "index_scenarios_on_project_id"
+
   create_table "users", force: true do |t|
-    t.text     "name"
+    t.text     "name",            null: false
     t.boolean  "admin"
-    t.string   "password_digest"
+    t.string   "password_digest", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
