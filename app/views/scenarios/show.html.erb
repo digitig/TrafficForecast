@@ -1,0 +1,95 @@
+<% @page_title = "Project: #{@scenario.project.name}; Scenario: #{@scenario.name}" %>
+<% if notice %>
+	<p id="notice"><%= notice %></p>
+<% end %>
+<div id="content">
+<table>
+  <tr>
+	<th>Name</th>
+	<td><%= @scenario.name %></td>
+	<th>% Domestic travellers on domestic routes</th>
+	<td><%= @scenario.dom_on_dom %></td>
+  </tr>
+  <tr>
+	<th>Base year</th>
+	<td><%= @scenario.base_year %></td>
+	<th>% Domestic travellers on domestic routes</th>
+	<td><%= @scenario.dom_on_int %></td>
+  </tr>
+  <tr>
+	<th>Min R<sup>2</sup></th>
+	<td><%= @scenario.min_r2 %></td>
+	<th>Optimal load factor</th>
+	<td><%= @scenario.optimal_load_factor %></td>
+  </tr>
+</table>
+<table>
+  <tr>
+	<td>Elasticity</td>
+	<th>Developed economy</th>
+	<th>Developing economy</th>
+  </tr>
+  <tr>
+	<th>Domestic</th>
+	<td><%= @scenario.el_dom_developed %></td>
+	<td class="empty_cell"/>
+  </tr>
+  <tr>
+	<th>Short haul</th>
+	<td><%= @scenario.el_short_developed %></td>
+	<td><%= @scenario.el_short_developing %></td>
+  </tr>
+  <tr>
+	<th>Medium haul</th>
+	<td><%= @scenario.el_medium_developed %></td>
+	<td><%= @scenario.el_medium_developing %></td>
+  </tr>
+  <tr>
+	<th>Long haul</th>
+	<td><%= @scenario.el_long_developed %></td>
+	<td><%= @scenario.el_long_developing %></td>
+  </tr>
+  <tr>
+	<th>Ultra-long haul</th>
+	<td><%= @scenario.el_ultra_developed %></td>
+	<td><%= @scenario.el_ultra_developing %></td>
+  </tr>
+</table>
+<table>
+  <tr>
+	<td>Saturation</td>
+	<th>Developed economy</th>
+	<th>Developing economy</th>
+  </tr>
+  <tr>
+	<th>Domestic</th>
+	<td><%= @scenario.sat_dom_developed %></td>
+	<td class="empty_cell" />
+  </tr>
+  <tr>
+	<th>Short haul</th>
+	<td><%= @scenario.sat_short_developed %></td>
+	<td><%= @scenario.sat_short_developing %></td>
+  </tr>
+  <tr>
+	<th>Medium haul</th>
+	<td><%= @scenario.sat_medium_developed %></td>
+	<td><%= @scenario.sat_medium_developing %></td>
+  </tr>
+  <tr>
+	<th>Long haul</th>
+	<td><%= @scenario.sat_long_developed %></td>
+	<td><%= @scenario.sat_long_developing %></td>
+  </tr>
+  <tr>
+	<th>Ultra-long haul</th>
+	<td><%= @scenario.sat_ultra_developed %></td>
+	<td><%= @scenario.sat_ultra_developing %></td>
+  </tr>
+</table>
+</div>
+<div id="chart">
+
+</div>
+<%= link_to 'Edit', edit_scenario_path(@scenario) %> |
+<%= link_to 'Back', scenarios_path %>

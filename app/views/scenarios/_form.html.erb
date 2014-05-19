@@ -1,0 +1,107 @@
+<% @page_title = 'New scenario' %>
+<%= form_for(@scenario) do |f| %>
+  <% if @scenario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@scenario.errors.count, "error") %> prohibited this scenario from being saved:</h2>
+
+      <ul>
+      <% @scenario.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<div class="field">
+	  <%= f.label :project_id %>
+	  <%= f.collection_select :project_id, Project.all, :id, :name %>
+	</div>
+
+	<table>
+	  <tr>
+		<td><%= f.label :name %></td>
+		<td><%= f.text_field :name %></td>
+		<td><%= f.label :dom_on_dom, "% Domestic travellers on domestic routes" %></td>
+		<td><%= f.text_field :dom_on_dom %></td>
+	  </tr>
+	  <tr>
+		<td><%= f.label :base_year %></td>
+		<td><%= f.number_field :base_year %></td>
+		<td><%= f.label :dom_on_int, "% Domestic travellers on international routes" %></td>
+		<td><%= f.text_field :dom_on_int %></td>
+	  </tr>
+	  <tr>
+		<td><%= f.label :min_r2, "Minimum acceptable R<sup>2</sup>".html_safe %></td>
+		<td><%= f.text_field :min_r2 %></td>
+		<td><%= f.label :optimal_load_factor %></td>
+		<td><%= f.text_field :optimal_load_factor %></td>
+	  </tr>
+	</table>
+<table>
+  <tr>
+	<td>Elasticity assumptions</td>
+	<th>Developed Economy</th>
+	<th>Developing Economy</th>
+  </tr>
+  <tr>
+	<th>Domestic</th>
+	<td><%= f.text_field :el_dom_developed %></td>
+	<td class="empty_cell" />
+  </tr>
+  <tr>
+	<th>Short haul</th>
+	<td><%= f.text_field :el_short_developed %></td>
+	<td><%= f.text_field :el_short_developing %></td>
+  </tr>
+  <tr>
+	<th>Medium haul</th>
+	<td><%= f.text_field :el_medium_developed %></td>
+	<td><%= f.text_field :el_medium_developing %></td>
+  </tr>
+  <tr>
+	<th>Long haul</th>
+	<td><%= f.text_field :el_long_developed %></td>
+	<td><%= f.text_field :el_long_developing %></td>
+  </tr>
+  <tr>
+	<th>Ultra-long haul</th>
+	<td><%= f.text_field :el_ultra_developed %></td>
+	<td><%= f.text_field :el_ultra_developing %></td>
+  </tr>
+</table>
+
+	<table>
+	  <tr>
+		<td>Saturation assumptions</td>
+		<th>Developed economy</th>
+		<th>Developing economy</th>
+	  </tr>
+	  <tr>
+		<th>Domestic</th>
+		<td><%= f.number_field :sat_dom_developed %></td>
+		<td class="empty_cell" />
+	  </tr>
+	  <tr>
+		<th>Short haul</th>
+		<td><%= f.number_field :sat_short_developed %></td>
+		<td><%= f.number_field :sat_short_developing %></td>
+	  </tr>
+	  <tr>
+		<th>Medium haul</th>
+		<td><%= f.number_field :sat_medium_developed %></td>
+		<td><%= f.number_field :sat_medium_developing %></td>
+	  </tr>
+	  <tr>
+		<th>Long haul</th>
+		<td><%= f.number_field :sat_long_developed %></td>
+		<td><%= f.number_field :sat_long_developing %></td>
+	  </tr>
+	  <tr>
+		<th>Ultra-long haul</th>
+		<td><%= f.number_field :sat_ultra_developed %></td>
+		<td><%= f.number_field :sat_ultra_developing %></td>
+	  </tr>
+	</table>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
