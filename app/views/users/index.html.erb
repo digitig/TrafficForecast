@@ -1,4 +1,7 @@
 <% @page_title = 'Users' %>
+<% if notice %>
+	<p id="notice"><%= notice %></p>
+<% end %>
 <table>
   <thead>
   <tr>
@@ -11,12 +14,14 @@
   <tbody>
   <% @users.each do |user| %>
 	  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-        <td><%= user.name %></td>
-        <td><%= user.admin %></td>
-        <td class="list_actions">
-	  <%= link_to 'Show', user %><br/>
-	  <%= link_to 'Edit', edit_user_path(user) %><br/>
-	  <%= link_to 'Destroy', user, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+		<td><%= user.name %></td>
+		<td><%= user.admin %></td>
+		<td class="list_actions">
+		  <%= link_to 'Show', user %>
+		  <br/>
+		  <%= link_to 'Edit', edit_user_path(user) %>
+		  <br/>
+		  <%= link_to 'Destroy', user, method: :delete, data: {confirm: 'Are you sure?'} %></td>
 	  </tr>
   <% end %>
   </tbody>

@@ -34,8 +34,8 @@ class Scenario < ActiveRecord::Base
             :sat_medium_developing,
             :sat_long_developing,
             :sat_ultra_developing,
-            numericality: { greater_than_or_equal_to: 2000}
-  validates :base_year, numericality: {less_than_or_equal_to: 2030}
+            numericality: { greater_than_or_equal_to: YEAR_RANGE.end}
+  validates :base_year, numericality: {less_than_or_equal_to: YEAR_RANGE.end}
   validates :dom_on_dom, :dom_on_int, numericality: {greater_than_or_equal_to: 0}
   validates :dom_on_dom, :dom_on_int, numericality: {less_than_or_equal_to: 100}
 end

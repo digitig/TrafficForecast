@@ -39,7 +39,10 @@ class ProjectsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render action: 'new' }
+        format.html {
+          flash[:alert] = "Cannot find airport '#{params[:project][:code]}'"
+          redirect_to :back
+        }
         format.json { render json: "Could not find airport #{params[:project][:code]}", status: :unprocessable_entity }
       end
     end

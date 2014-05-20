@@ -25,7 +25,7 @@
 	  </tr>
 	  <tr>
 		<td><%= f.label :base_year %></td>
-		<td><%= f.number_field :base_year %></td>
+		<td><%= f.number_field :base_year, value: Time.now.year, in: YEAR_RANGE %></td>
 		<td><%= f.label :dom_on_int, "% Domestic travellers on international routes" %></td>
 		<td><%= f.text_field :dom_on_int %></td>
 	  </tr>

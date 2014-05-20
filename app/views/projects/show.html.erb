@@ -1,6 +1,6 @@
 <% @page_title = "Project: #{@project.name}" %>
-<% if notice %>
-	<p id="notice"><%= notice %></p>
+<% if flash[:alert] %>
+	<p id="notice"><%= flash[:alert] %></p>
 <% end %>
 
 
@@ -40,6 +40,6 @@
 	  <h1>No scenarios defined</h1>
   <% end %>
 </div>
-
+<%= link_to 'New Scenario', new_scenario_path %> |
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

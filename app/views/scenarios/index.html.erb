@@ -1,26 +1,31 @@
 <% @page_title = "Scenarios" %>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Base year</th>
-      <th></th>
-    </tr>
-  </thead>
+<% if @scenarios.count > 0 %>
+	<table>
+	  <thead>
+	  <tr>
+		<th>Name</th>
+		<th>Base year</th>
+		<th></th>
+	  </tr>
+	  </thead>
 
-  <tbody>
-    <% @scenarios.each do |scenario| %>
-      <tr>
-        <td><%= scenario.name %></td>
-        <td><%= scenario.base_year %></td>
-        <td class="list_actions"><%= link_to 'Show', scenario %><br/>
-		  <%= link_to 'Edit', edit_scenario_path(scenario) %><br/>
-		  <%= link_to 'Destroy', scenario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	  <tbody>
+	  <% @scenarios.each do |scenario| %>
+		  <tr>
+			<td><%= scenario.name %></td>
+			<td><%= scenario.base_year %></td>
+			<td class="list_actions"><%= link_to 'Show', scenario %>
+			  <br/>
+			  <%= link_to 'Edit', edit_scenario_path(scenario) %>
+			  <br/>
+			  <%= link_to 'Destroy', scenario, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+		  </tr>
+	  <% end %>
+	  </tbody>
+	</table>
 
-<br>
-
+	<br>
+<% else %>
+	<h1>No scenarios defined</h1>
+<% end %>
 <%= link_to 'New Scenario', new_scenario_path %>

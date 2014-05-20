@@ -1,4 +1,7 @@
 <% @page_title = 'Create new project' %>
+<% if flash[:alert] %>
+	<p id="notice"><%= flash[:alert] %></p>
+<% end %>
 
 <%= render 'form' %>
 
