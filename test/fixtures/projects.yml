@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1,
-  name: 'Athens'
-  client: 'Athens Airport'
+  id: 1
+  name: 'Bamyan'
+  client: 'Us'
   airport_id: 1
 
 two:
   id: 2
-  name: 'Heathrow'
-  client: 'Heathrow Airport'
+  name: 'Bost'
+  client: 'Someone else'
   airport_id: 2

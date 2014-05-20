@@ -19,7 +19,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-
   end
 
   # POST /projects
@@ -28,6 +27,7 @@ class ProjectsController < ApplicationController
     airport = Airport.find_by(code: params[:project][:code])
     if airport
       @project = airport.projects.new(project_params)
+
       respond_to do |format|
         if @project.save
           format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -38,14 +38,16 @@ class ProjectsController < ApplicationController
         end
       end
     else
-      # TODO Error response
+      respond_to do |format|
+        format.html { render action: 'new' }
+        format.json { render json: "Could not find airport #{params[:project][:code]}", status: :unprocessable_entity }
+      end
     end
   end
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    # TODO handle or block changing of airport
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }

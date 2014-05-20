@@ -1,8 +1,8 @@
-<% @page_title = notice %>
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
+<% @page_title = "Project: #{@project.name}" %>
+<% if notice %>
+	<p id="notice"><%= notice %></p>
+<% end %>
+
 
 <p>
   <strong>Client:</strong>
@@ -13,6 +13,33 @@
   <strong>Airport:</strong>
   <%= @project.airport.name %>
 </p>
+<div id="scenarios">
+  <% if @project.scenarios.count > 0 %>
+	  <h1>Scenarios</h1>
+	  <table>
+		<tr>
+		  <th>Name</th>
+		  <th>Base year</th>
+		  <th></th>
+		</tr>
+		<% @project.scenarios.each do |scenario| %>
+			<tr>
+			  <td><%= scenario.name %></td>
+			  <td><%= scenario.base_year %></td>
+			  <td class="list_actions">
+				<%= link_to 'Show', scenario %>
+				<br/>
+				<%= link_to 'Edit', edit_scenario_path(scenario) %>
+				<br/>
+				<%= link_to 'Destroy', scenario, method: :delete, data: {confirm: 'Are you sure'} %>
+			  </td>
+			</tr>
+		<% end %>
+	  </table>
+  <% else %>
+	  <h1>No scenarios defined</h1>
+  <% end %>
+</div>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

@@ -1,35 +1,9 @@
-<h1>Listing scenarios</h1>
-
+<% @page_title = "Scenarios" %>
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Base year</th>
-      <th>Dom on dom</th>
-      <th>Dom on int</th>
-      <th>Min r2</th>
-      <th>El dom developed</th>
-      <th>El short developed</th>
-      <th>El medium developed</th>
-      <th>El long developed</th>
-      <th>El ultra developed</th>
-      <th>El short developing</th>
-      <th>El medium developing</th>
-      <th>El long developing</th>
-      <th>El ultra developing</th>
-      <th>Sat dom developed</th>
-      <th>Sat short developed</th>
-      <th>Sat medium developed</th>
-      <th>Sat long developed</th>
-      <th>Sat ultra developed</th>
-      <th>Sat short developing</th>
-      <th>Sat medium developing</th>
-      <th>Sat long developing</th>
-      <th>Sat ultra developing</th>
-      <th>Optimal load factor</th>
-      <th>Project</th>
-      <th></th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -39,32 +13,9 @@
       <tr>
         <td><%= scenario.name %></td>
         <td><%= scenario.base_year %></td>
-        <td><%= scenario.dom_on_dom %></td>
-        <td><%= scenario.dom_on_int %></td>
-        <td><%= scenario.min_r2 %></td>
-        <td><%= scenario.el_dom_developed %></td>
-        <td><%= scenario.el_short_developed %></td>
-        <td><%= scenario.el_medium_developed %></td>
-        <td><%= scenario.el_long_developed %></td>
-        <td><%= scenario.el_ultra_developed %></td>
-        <td><%= scenario.el_short_developing %></td>
-        <td><%= scenario.el_medium_developing %></td>
-        <td><%= scenario.el_long_developing %></td>
-        <td><%= scenario.el_ultra_developing %></td>
-        <td><%= scenario.sat_dom_developed %></td>
-        <td><%= scenario.sat_short_developed %></td>
-        <td><%= scenario.sat_medium_developed %></td>
-        <td><%= scenario.sat_long_developed %></td>
-        <td><%= scenario.sat_ultra_developed %></td>
-        <td><%= scenario.sat_short_developing %></td>
-        <td><%= scenario.sat_medium_developing %></td>
-        <td><%= scenario.sat_long_developing %></td>
-        <td><%= scenario.sat_ultra_developing %></td>
-        <td><%= scenario.optimal_load_factor %></td>
-        <td><%= scenario.project %></td>
-        <td><%= link_to 'Show', scenario %></td>
-        <td><%= link_to 'Edit', edit_scenario_path(scenario) %></td>
-        <td><%= link_to 'Destroy', scenario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="list_actions"><%= link_to 'Show', scenario %><br/>
+		  <%= link_to 'Edit', edit_scenario_path(scenario) %><br/>
+		  <%= link_to 'Destroy', scenario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

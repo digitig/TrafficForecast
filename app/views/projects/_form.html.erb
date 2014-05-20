@@ -23,7 +23,7 @@
 		<td><label for="code">Airport identifier</label></td>
 		<td><input type="text" id="code" name="project[code]" class="code_input"
 				   <% if @project.airport %>
-		value=<%= @project.airport.code %>
+		<%= @project.airport.code %>
 		<% end %> />
 		</td>
 	  </tr>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516171347) do
+ActiveRecord::Schema.define(version: 20140520083254) do
 
   create_table "airports", force: true do |t|
     t.text     "code",       limit: 3,  null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140516171347) do
   end
 
   create_table "projects", force: true do |t|
-    t.text     "name",       null: false
+    t.text     "name"
     t.text     "client"
     t.integer  "airport_id"
     t.datetime "created_at"

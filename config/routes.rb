@@ -1,9 +1,9 @@
 TrafficForecast::Application.routes.draw do
-  resources :scenarios
-
-  get "forecaster/index"
   resources :projects
 
+  resources :scenarios
+
+  get 'forecaster/index'
   resources :users
 
   resources :regions
