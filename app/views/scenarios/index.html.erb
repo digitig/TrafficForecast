@@ -11,7 +11,7 @@
 
 	  <tbody>
 	  <% @scenarios.each do |scenario| %>
-		  <tr>
+		  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
 			<td><%= scenario.name %></td>
 			<td><%= scenario.base_year %></td>
 			<td class="list_actions"><%= link_to 'Show', scenario %>

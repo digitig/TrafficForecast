@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520083254) do
+ActiveRecord::Schema.define(version: 20140521083455) do
 
   create_table "airports", force: true do |t|
     t.text     "code",       limit: 3,  null: false
@@ -65,33 +65,45 @@ ActiveRecord::Schema.define(version: 20140520083254) do
   add_index "regions", ["country_id"], name: "index_regions_on_country_id"
 
   create_table "scenarios", force: true do |t|
-    t.text     "name",                  null: false
-    t.integer  "base_year",             null: false
-    t.float    "dom_on_dom",            null: false
-    t.float    "dom_on_int",            null: false
-    t.float    "min_r2",                null: false
-    t.float    "el_dom_developed",      null: false
-    t.float    "el_short_developed",    null: false
-    t.float    "el_medium_developed",   null: false
-    t.float    "el_long_developed",     null: false
-    t.float    "el_ultra_developed",    null: false
-    t.float    "el_short_developing",   null: false
-    t.float    "el_medium_developing",  null: false
-    t.float    "el_long_developing",    null: false
-    t.float    "el_ultra_developing",   null: false
-    t.integer  "sat_dom_developed",     null: false
-    t.integer  "sat_short_developed",   null: false
-    t.integer  "sat_medium_developed",  null: false
-    t.integer  "sat_long_developed",    null: false
-    t.integer  "sat_ultra_developed",   null: false
-    t.integer  "sat_short_developing",  null: false
-    t.integer  "sat_medium_developing", null: false
-    t.integer  "sat_long_developing",   null: false
-    t.integer  "sat_ultra_developing",  null: false
+    t.text     "name",                                   null: false
+    t.integer  "base_year",                              null: false
+    t.float    "dom_on_dom",                             null: false
+    t.float    "dom_on_int",                             null: false
+    t.float    "min_r2",                                 null: false
+    t.float    "el_dom_developed",        default: 1.3,  null: false
+    t.float    "el_short_developed",      default: 1.5,  null: false
+    t.float    "el_medium_developed",     default: 1.6,  null: false
+    t.float    "el_long_developed",       default: 1.7,  null: false
+    t.float    "el_ultra_developed",      default: 2.4,  null: false
+    t.float    "el_short_developing",     default: 2.0,  null: false
+    t.float    "el_medium_developing",    default: 2.0,  null: false
+    t.float    "el_long_developing",      default: 2.2,  null: false
+    t.float    "el_ultra_developing",     default: 2.7,  null: false
+    t.integer  "sat_dom_developed",       default: 2030, null: false
+    t.integer  "sat_short_developed",     default: 2030, null: false
+    t.integer  "sat_medium_developed",    default: 2030, null: false
+    t.integer  "sat_long_developed",      default: 2030, null: false
+    t.integer  "sat_ultra_developed",     default: 2030, null: false
+    t.integer  "sat_short_developing",    default: 2040, null: false
+    t.integer  "sat_medium_developing",   default: 2040, null: false
+    t.integer  "sat_long_developing",     default: 2040, null: false
+    t.integer  "sat_ultra_developing",    default: 2040, null: false
     t.float    "optimal_load_factor"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "el_dom_developing",       default: 1.8,  null: false
+    t.float    "el_dom_transitional",     default: 1.8,  null: false
+    t.float    "el_short_transitional",   default: 2.0,  null: false
+    t.float    "el_medium_transitional",  default: 2.0,  null: false
+    t.float    "el_long_transitional",    default: 2.2,  null: false
+    t.float    "el_ultra_transitional",   default: 2.7,  null: false
+    t.integer  "sat_dom_developing",      default: 2040, null: false
+    t.integer  "sat_dom_transitional",    default: 2040, null: false
+    t.integer  "sat_short_transitional",  default: 2040, null: false
+    t.integer  "sat_medium_transitional", default: 2040, null: false
+    t.integer  "sat_long_transitional",   default: 2040, null: false
+    t.integer  "sat_ultra_transitional",  default: 2040, null: false
   end
 
   add_index "scenarios", ["project_id"], name: "index_scenarios_on_project_id"

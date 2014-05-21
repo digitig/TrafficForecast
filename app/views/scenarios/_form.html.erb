@@ -1,16 +1,16 @@
 <% @page_title = 'New scenario' %>
 <%= form_for(@scenario) do |f| %>
-  <% if @scenario.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@scenario.errors.count, "error") %> prohibited this scenario from being saved:</h2>
+	<% if @scenario.errors.any? %>
+		<div id="error_explanation">
+		  <h2><%= pluralize(@scenario.errors.count, "error") %> prohibited this scenario from being saved:</h2>
 
-      <ul>
-      <% @scenario.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+		  <ul>
+			<% @scenario.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		  </ul>
+		</div>
+	<% end %>
 	<div class="field">
 	  <%= f.label :project_id %>
 	  <%= f.collection_select :project_id, Project.all, :id, :name %>
@@ -36,72 +36,84 @@
 		<td><%= f.text_field :optimal_load_factor %></td>
 	  </tr>
 	</table>
-<table>
-  <tr>
-	<td>Elasticity assumptions</td>
-	<th>Developed Economy</th>
-	<th>Developing Economy</th>
-  </tr>
-  <tr>
-	<th>Domestic</th>
-	<td><%= f.text_field :el_dom_developed %></td>
-	<td class="empty_cell" />
-  </tr>
-  <tr>
-	<th>Short haul</th>
-	<td><%= f.text_field :el_short_developed %></td>
-	<td><%= f.text_field :el_short_developing %></td>
-  </tr>
-  <tr>
-	<th>Medium haul</th>
-	<td><%= f.text_field :el_medium_developed %></td>
-	<td><%= f.text_field :el_medium_developing %></td>
-  </tr>
-  <tr>
-	<th>Long haul</th>
-	<td><%= f.text_field :el_long_developed %></td>
-	<td><%= f.text_field :el_long_developing %></td>
-  </tr>
-  <tr>
-	<th>Ultra-long haul</th>
-	<td><%= f.text_field :el_ultra_developed %></td>
-	<td><%= f.text_field :el_ultra_developing %></td>
-  </tr>
-</table>
+	<table>
+	  <tr>
+		<td>Elasticity assumptions</td>
+		<th>Developed Economy</th>
+		<th>Developing Economy</th>
+		<th>Transitional Economy</th>
+	  </tr>
+	  <tr>
+		<th>Domestic</th>
+		<td><%= f.text_field :el_dom_developed %></td>
+		<td><%= f.text_field :el_dom_developing %></td>
+		<td><%= f.text_field :el_dom_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Short haul</th>
+		<td><%= f.text_field :el_short_developed %></td>
+		<td><%= f.text_field :el_short_developing %></td>
+		<td><%= f.text_field :el_short_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Medium haul</th>
+		<td><%= f.text_field :el_medium_developed %></td>
+		<td><%= f.text_field :el_medium_developing %></td>
+		<td><%= f.text_field :el_medium_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Long haul</th>
+		<td><%= f.text_field :el_long_developed %></td>
+		<td><%= f.text_field :el_long_developing %></td>
+		<td><%= f.text_field :el_long_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Ultra-long haul</th>
+		<td><%= f.text_field :el_ultra_developed %></td>
+		<td><%= f.text_field :el_ultra_developing %></td>
+		<td><%= f.text_field :el_ultra_transitional %></td>
+	  </tr>
+	</table>
 
 	<table>
 	  <tr>
 		<td>Saturation assumptions</td>
 		<th>Developed economy</th>
 		<th>Developing economy</th>
+		<th>Transitional economy</th>
 	  </tr>
 	  <tr>
 		<th>Domestic</th>
 		<td><%= f.number_field :sat_dom_developed %></td>
-		<td class="empty_cell" />
+		<td><%= f.number_field :sat_dom_developing %></td>
+		<td><%= f.number_field :sat_dom_transitional %></td>
 	  </tr>
 	  <tr>
 		<th>Short haul</th>
 		<td><%= f.number_field :sat_short_developed %></td>
 		<td><%= f.number_field :sat_short_developing %></td>
+		<td><%= f.number_field :sat_short_transitional %></td>
 	  </tr>
 	  <tr>
 		<th>Medium haul</th>
 		<td><%= f.number_field :sat_medium_developed %></td>
 		<td><%= f.number_field :sat_medium_developing %></td>
+		<td><%= f.number_field :sat_medium_transitional %></td>
 	  </tr>
 	  <tr>
 		<th>Long haul</th>
 		<td><%= f.number_field :sat_long_developed %></td>
 		<td><%= f.number_field :sat_long_developing %></td>
+		<td><%= f.number_field :sat_long_transitional %></td>
 	  </tr>
 	  <tr>
 		<th>Ultra-long haul</th>
 		<td><%= f.number_field :sat_ultra_developed %></td>
 		<td><%= f.number_field :sat_ultra_developing %></td>
+		<td><%= f.number_field :sat_ultra_transitional %></td>
 	  </tr>
 	</table>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<div class="actions">
+	  <%= f.submit %>
+	</div>
 <% end %>

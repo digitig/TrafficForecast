@@ -19,8 +19,9 @@
 </div>
 <div id="navigation">
   <ul>
-	<li><a href="www.???">Projects</a></li>
-	<li><a href="www.???">Scenarios</a></li>
+	<li><%= link_to 'Projects', projects_path %></li>
+	<li><%= link_to 'Scenarios', scenarios_path %></li>
+	<li><%= link_to 'Logoff', sessions_destroy_path %></li>
   </ul>
 </div>
 <div id="content">

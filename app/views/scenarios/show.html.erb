@@ -1,165 +1,181 @@
 <% @page_title = "Project: #{@scenario.project.name}; Scenario: #{@scenario.name}" %>
-<% if notice %>
-	<p id="notice"><%= notice %></p>
+<% if flash[:alert] %>
+	<p id="notice"><%= flash[:alert] %></p>
 <% end %>
-<div id="assumptions">
-  <table>
-	<tr>
-	  <th>Name</th>
-	  <td><%= @scenario.name %></td>
-	  <th>% Domestic travellers on domestic routes</th>
-	  <td><%= @scenario.dom_on_dom %></td>
-	</tr>
-	<tr>
-	  <th>Base year</th>
-	  <td><%= @scenario.base_year %></td>
-	  <th>% Domestic travellers on domestic routes</th>
-	  <td><%= @scenario.dom_on_int %></td>
-	</tr>
-	<tr>
-	  <th>Min R<sup>2</sup></th>
-	  <td><%= @scenario.min_r2 %></td>
-	  <th>Optimal load factor</th>
-	  <td><%= @scenario.optimal_load_factor %></td>
-	</tr>
-  </table>
-  <table>
-	<tr>
-	  <td>Elasticity</td>
-	  <th>Developed economy</th>
-	  <th>Developing economy</th>
-	</tr>
-	<tr>
-	  <th>Domestic</th>
-	  <td><%= @scenario.el_dom_developed %></td>
-	  <td class="empty_cell"/>
-	</tr>
-	<tr>
-	  <th>Short haul</th>
-	  <td><%= @scenario.el_short_developed %></td>
-	  <td><%= @scenario.el_short_developing %></td>
-	</tr>
-	<tr>
-	  <th>Medium haul</th>
-	  <td><%= @scenario.el_medium_developed %></td>
-	  <td><%= @scenario.el_medium_developing %></td>
-	</tr>
-	<tr>
-	  <th>Long haul</th>
-	  <td><%= @scenario.el_long_developed %></td>
-	  <td><%= @scenario.el_long_developing %></td>
-	</tr>
-	<tr>
-	  <th>Ultra-long haul</th>
-	  <td><%= @scenario.el_ultra_developed %></td>
-	  <td><%= @scenario.el_ultra_developing %></td>
-	</tr>
-  </table>
-  <table>
-	<tr>
-	  <td>Saturation</td>
-	  <th>Developed economy</th>
-	  <th>Developing economy</th>
-	</tr>
-	<tr>
-	  <th>Domestic</th>
-	  <td><%= @scenario.sat_dom_developed %></td>
-	  <td class="empty_cell"/>
-	</tr>
-	<tr>
-	  <th>Short haul</th>
-	  <td><%= @scenario.sat_short_developed %></td>
-	  <td><%= @scenario.sat_short_developing %></td>
-	</tr>
-	<tr>
-	  <th>Medium haul</th>
-	  <td><%= @scenario.sat_medium_developed %></td>
-	  <td><%= @scenario.sat_medium_developing %></td>
-	</tr>
-	<tr>
-	  <th>Long haul</th>
-	  <td><%= @scenario.sat_long_developed %></td>
-	  <td><%= @scenario.sat_long_developing %></td>
-	</tr>
-	<tr>
-	  <th>Ultra-long haul</th>
-	  <td><%= @scenario.sat_ultra_developed %></td>
-	  <td><%= @scenario.sat_ultra_developing %></td>
-	</tr>
-  </table>
+<div>
+  <div id="assumptions">
+	<table>
+	  <tr>
+		<th>Name</th>
+		<td><%= @scenario.name %></td>
+		<th>Domestic travellers on domestic routes</th>
+		<td><%= @scenario.dom_on_dom %>%</td>
+	  </tr>
+	  <tr>
+		<th>Base year</th>
+		<td><%= @scenario.base_year %></td>
+		<th>Domestic travellers on domestic routes</th>
+		<td><%= @scenario.dom_on_int %>%</td>
+	  </tr>
+	  <tr>
+		<th>Min R<sup>2</sup></th>
+		<td><%= @scenario.min_r2 %></td>
+		<th>Optimal load factor</th>
+		<td><%= @scenario.optimal_load_factor %></td>
+	  </tr>
+	</table>
+	<table>
+	  <tr>
+		<td>Elasticity</td>
+		<th>Developed economy</th>
+		<th>Developing economy</th>
+		<th>Transitional economy</th>
+	  </tr>
+	  <tr>
+		<th>Domestic</th>
+		<td><%= @scenario.el_dom_developed %></td>
+		<td><%= @scenario.el_dom_developing %></td>
+		<td><%= @scenario.el_dom_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Short haul</th>
+		<td><%= @scenario.el_short_developed %></td>
+		<td><%= @scenario.el_short_developing %></td>
+		<td><%= @scenario.el_short_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Medium haul</th>
+		<td><%= @scenario.el_medium_developed %></td>
+		<td><%= @scenario.el_medium_developing %></td>
+		<td><%= @scenario.el_medium_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Long haul</th>
+		<td><%= @scenario.el_long_developed %></td>
+		<td><%= @scenario.el_long_developing %></td>
+		<td><%= @scenario.el_long_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Ultra-long haul</th>
+		<td><%= @scenario.el_ultra_developed %></td>
+		<td><%= @scenario.el_ultra_developing %></td>
+		<td><%= @scenario.el_ultra_transitional %></td>
+	  </tr>
+	</table>
+	<table>
+	  <tr>
+		<td>Saturation</td>
+		<th>Developed economy</th>
+		<th>Developing economy</th>
+		<th>Transitional economy</th>
+	  </tr>
+	  <tr>
+		<th>Domestic</th>
+		<td><%= @scenario.sat_dom_developed %></td>
+		<td><%= @scenario.sat_dom_developing %></td>
+		<td><%= @scenario.sat_dom_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Short haul</th>
+		<td><%= @scenario.sat_short_developed %></td>
+		<td><%= @scenario.sat_short_developing %></td>
+		<td><%= @scenario.sat_short_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Medium haul</th>
+		<td><%= @scenario.sat_medium_developed %></td>
+		<td><%= @scenario.sat_medium_developing %></td>
+		<td><%= @scenario.sat_medium_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Long haul</th>
+		<td><%= @scenario.sat_long_developed %></td>
+		<td><%= @scenario.sat_long_developing %></td>
+		<td><%= @scenario.sat_long_transitional %></td>
+	  </tr>
+	  <tr>
+		<th>Ultra-long haul</th>
+		<td><%= @scenario.sat_ultra_developed %></td>
+		<td><%= @scenario.sat_ultra_developing %></td>
+		<td><%= @scenario.sat_ultra_transitional %></td>
+	  </tr>
+	</table>
+  </div>
+  <script>
+	  $(function () {
+		  Highcharts.setOptions({
+			  lang: {
+				  thousandsSep: '\u2009'
+			  }
+		  })
+		  new Highcharts.Chart({
+			  chart: {
+				  renderTo: 'container',
+				  type: 'area'
+			  },
+			  title: {
+				  text: 'Total PAX Forecast'
+			  },
+			  subtitle: {
+				  text: '(dummy data)'
+			  },
+			  xAxis: {
+				  categories: [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030]
+			  },
+			  yAxis: {
+				  title: {
+					  text: 'PAX (Millions)'
+				  },
+				  labels: {
+					  formatter: function () {
+						  return this.value / 1000000;
+					  }
+				  }
+			  },
+			  plotOptions: {
+				  area: {
+					  stacking: 'normal',
+					  lineColor: '#666666',
+					  lineWidth: 1,
+					  marker: {
+						  lineWidth: 1,
+						  lineColor: '#666666'
+					  }
+				  }
+			  },
+			  plotOptions: {
+				  area: {
+					  stacking: 'normal',
+					  lineColor: '#666666',
+					  lineWidth: 1,
+					  marker: {
+						  lineWidth: 1,
+						  lineColor: '#666666'
+					  }
+				  }
+			  },
+			  series: [
+				  {
+					  name: 'Non-EU PAX',
+					  data: [ 2629571, 2620424, 2703403, 2830833, 2977782, 3113907, 3251019, 3303107, 3353873, 3406530, 3461501, 3518587, 3578371, 3639335, 3702356, 3768055, 3834125, 3900361]
+				  },
+				  {
+					  name: 'EU Pax',
+					  data: [ 5291741, 5158454, 5218650, 5353187, 5510725, 5658339, 5811159, 5858288, 5907476, 5963362, 6025102, 6093065, 6168242, 6249038, 6335482, 6428108, 6524729, 6623053]
+				  },
+				  {
+					  name: 'Domestic PAX',
+					  data: [5203058, 4983937, 5004906, 5124533, 5276379, 5407476, 5531178, 5549804, 5569246, 5595782, 5629211, 5669266, 5718752, 5774362, 5839002, 5912579, 5991980, 6074111]
+				  }
+			  ]
+		  });
+	  });
+  </script>
+  <div id="chart">
+	<div id="container"></div>
+  </div>
 </div>
-<script>
-	$(function () {
-		Highcharts.setOptions({
-			lang: {
-				thousandsSep: '\u2009'
-			}
-		})
-		new Highcharts.Chart({
-			chart: {
-				renderTo: 'container',
-				type: 'area'
-			},
-			title: {
-				text: 'Total PAX Forecast'
-			},
-			subtitle: {
-				text: '(dummy data)'
-			},
-			xAxis: {
-				categories: [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030]
-			},
-			yAxis: {
-				title: {
-					text: 'PAX (Millions)'
-				},
-				labels: {
-					formatter: function() {
-						return this.value / 1000000;
-					}
-				}
-			},
-			plotOptions: {
-				area: {
-					stacking: 'normal',
-					lineColor: '#666666',
-					lineWidth: 1,
-					marker: {
-						lineWidth: 1,
-						lineColor: '#666666'
-					}
-				}
-			},
-			plotOptions: {
-				area: {
-					stacking: 'normal',
-					lineColor: '#666666',
-					lineWidth: 1,
-					marker: {
-						lineWidth: 1,
-						lineColor: '#666666'
-					}
-				}
-			},
-			series: [
-				{
-					name: 'Non-EU PAX',
-					data: [ 2629571, 2620424, 2703403, 2830833, 2977782, 3113907, 3251019, 3303107, 3353873, 3406530, 3461501, 3518587, 3578371, 3639335, 3702356, 3768055, 3834125, 3900361]
-				},
-				{
-					name: 'EU Pax',
-					data: [ 5291741,  5158454, 5218650, 5353187, 5510725, 5658339, 5811159, 5858288, 5907476, 5963362, 6025102, 6093065, 6168242, 6249038, 6335482, 6428108, 6524729, 6623053]
-				},
-				{
-					name: 'Domestic PAX',
-					data: [5203058, 4983937, 5004906, 5124533, 5276379, 5407476, 5531178, 5549804, 5569246, 5595782, 5629211, 5669266, 5718752, 5774362, 5839002, 5912579, 5991980, 6074111]
-				}
-			]
-		});
-	});
-</script>
-<div id="chart">
-  <div id="container"></div>
-</div>
+<div id="links">
 <%= link_to 'Edit', edit_scenario_path(@scenario) %> |
 <%= link_to 'Back', scenarios_path %>
+</div>
